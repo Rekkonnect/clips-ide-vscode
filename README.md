@@ -54,13 +54,20 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-## 1.2.2
+### 1.2.4
+
+Added buttons:
+- Clear all and load current file
+- Clear all and reset run current file
+- Rerun (combines reset and run)
+
+### 1.2.2
 
 Fixed logs not being shown on VSCode's output channel
 
 Added new log level: "error"
 
-## 1.2.1
+### 1.2.1
 
 Updated project dependencies
 
