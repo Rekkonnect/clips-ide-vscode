@@ -80,6 +80,18 @@
 				"enablement": "clips-ide.terminalOpen"
 			},
 			{
+				"command": "clips-ide.clear-all-load-current-file",
+				"category": "CLIPS",
+				"title": "Clear All Load Current File",
+				"enablement": "clips-ide.terminalOpen"
+			},
+			{
+				"command": "clips-ide.clear-all-rerun-current-file",
+				"category": "CLIPS",
+				"title": "Clear All Reset Run Current File",
+				"enablement": "clips-ide.terminalOpen"
+			},
+			{
 				"command": "clips-ide.cmd-reset",
 				"category": "CLIPS Command",
 				"title": "Reset",
@@ -95,6 +107,12 @@
 				"command": "clips-ide.cmd-run",
 				"category": "CLIPS Command",
 				"title": "Run",
+				"enablement": "clips-ide.terminalOpen"
+			},
+			{
+				"command": "clips-ide.cmd-rerun",
+				"category": "CLIPS Command",
+				"title": "Reset",
 				"enablement": "clips-ide.terminalOpen"
 			},
 			{
@@ -141,6 +159,14 @@
 				{
 					"command": "clips-ide.load-current-file",
 					"when": "resourceLangId == clips && clips-ide.terminalOpen"
+				},
+				{
+					"command": "clips-ide.clear-all-load-current-file",
+					"when": "resourceLangId == clips && clips-ide.terminalOpen"
+				},
+				{
+					"command": "clips-ide.clear-all-rerun-current-file",
+					"when": "resourceLangId == clips && clips-ide.terminalOpen"
 				}
 			],
 			"editor/title/run": [
@@ -158,6 +184,16 @@
 			"clips-ide.menu": [
 				{
 					"command": "clips-ide.load-current-file",
+					"when": "resourceLangId == clips && clips-ide.terminalOpen",
+					"group": "1_load"
+				},
+				{
+					"command": "clips-ide.clear-all-load-current-file",
+					"when": "resourceLangId == clips && clips-ide.terminalOpen",
+					"group": "1_load"
+				},
+				{
+					"command": "clips-ide.clear-all-rerun-current-file",
 					"when": "resourceLangId == clips && clips-ide.terminalOpen",
 					"group": "1_load"
 				},
@@ -211,9 +247,14 @@
 					"group": "clips.run"
 				},
 				{
-					"command": "clips-ide.cmd-clear",
+					"command": "clips-ide.cmd-rerun",
 					"when": "resourceLangId == clips && clips-ide.terminalOpen",
 					"group": "clips.run"
+				},
+				{
+					"command": "clips-ide.cmd-clear",
+					"when": "resourceLangId == clips && clips-ide.terminalOpen",
+					"group": "clips.clear"
 				}
 			]
 		},

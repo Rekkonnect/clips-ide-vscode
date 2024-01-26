@@ -151,6 +151,50 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const clearAllLoadCD = vscode.commands.registerCommand(
+    'clips-ide.clear-all-load-current-file',
+    async () => {
+      const filePath = vscode.window.activeTextEditor?.document.fileName;
+      if (!filePath) {
+        vscode.window.showErrorMessage(
+          'Error: There is no currently open file.'
+        );
+        return;
+      }
+      if (!state.clips?.hasTerminal()) {
+        vscode.window.showErrorMessage(
+          'Error: The CLIPS terminal is not open.'
+        );
+        return;
+      }
+      state.clips?.sendCommand(`clear`);
+      state.clips?.sendCommand(`load "${fixFsPath(filePath)}"`);
+    }
+  );
+
+  const clearAllRerunCD = vscode.commands.registerCommand(
+    'clips-ide.clear-all-rerun-current-file',
+    async () => {
+      const filePath = vscode.window.activeTextEditor?.document.fileName;
+      if (!filePath) {
+        vscode.window.showErrorMessage(
+          'Error: There is no currently open file.'
+        );
+        return;
+      }
+      if (!state.clips?.hasTerminal()) {
+        vscode.window.showErrorMessage(
+          'Error: The CLIPS terminal is not open.'
+        );
+        return;
+      }
+      state.clips?.sendCommand(`clear`);
+      state.clips?.sendCommand(`load "${fixFsPath(filePath)}"`);
+      state.clips?.sendCommand(`reset`);
+      state.clips?.sendCommand(`run`);
+    }
+  );
+
   // VSCode commands for executing CLIPS commands in terminal
   ['run', 'reset', 'clear'].forEach((cmd) => {
     const cmdD = vscode.commands.registerCommand('clips-ide.cmd-' + cmd, () => {
@@ -164,6 +208,20 @@ export function activate(context: vscode.ExtensionContext) {
     });
     context.subscriptions.push(cmdD);
   });
+
+  const rerunD = vscode.commands.registerCommand(
+    'clips-ide.cmd-rerun',
+    () => {
+      if (!state.clips?.hasTerminal()) {
+        vscode.window.showErrorMessage(
+          'Error: The CLIPS terminal is not open.'
+        );
+        return;
+      }
+      state.clips?.sendCommand(`reset`);
+      state.clips?.sendCommand(`run`);
+    }
+  );
 
   const viewsD = views.registerCommands();
 
@@ -206,6 +264,9 @@ export function activate(context: vscode.ExtensionContext) {
     mainD,
     docD,
     loadD,
+    clearAllLoadCD,
+    clearAllRerunCD,
+    rerunD,
     loadCD,
     activeD,
     views,
